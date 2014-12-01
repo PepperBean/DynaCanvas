@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynaCanvas.Data", "DynaCanvas.Data\DynaCanvas.Data.csproj", "{8F02BFA1-7A63-4932-AC85-E6E97ACE72EC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{88FE31A6-4219-43C7-9434-7E86711FE606}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Drawing", "Drawing", "{B61A81C1-E461-4B35-80F7-E6E4E17E2E01}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Render", "Render", "{D0E95E99-D4FE-48C2-9EE6-61FB9274E5A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{B3A986B5-9D22-4BC2-B0A9-027524B08C70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynaCanvas.Data.Shapefile", "DynaCanvas.Data.Shapefile\DynaCanvas.Data.Shapefile.csproj", "{6036B313-3C75-4954-B463-92196F4493CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{E1E5F571-CE0A-4EE3-8FDF-8C4065DCD08B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F02BFA1-7A63-4932-AC85-E6E97ACE72EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F02BFA1-7A63-4932-AC85-E6E97ACE72EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F02BFA1-7A63-4932-AC85-E6E97ACE72EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F02BFA1-7A63-4932-AC85-E6E97ACE72EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6036B313-3C75-4954-B463-92196F4493CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6036B313-3C75-4954-B463-92196F4493CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6036B313-3C75-4954-B463-92196F4493CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6036B313-3C75-4954-B463-92196F4493CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1E5F571-CE0A-4EE3-8FDF-8C4065DCD08B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1E5F571-CE0A-4EE3-8FDF-8C4065DCD08B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1E5F571-CE0A-4EE3-8FDF-8C4065DCD08B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1E5F571-CE0A-4EE3-8FDF-8C4065DCD08B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8F02BFA1-7A63-4932-AC85-E6E97ACE72EC} = {88FE31A6-4219-43C7-9434-7E86711FE606}
+		{6036B313-3C75-4954-B463-92196F4493CF} = {88FE31A6-4219-43C7-9434-7E86711FE606}
+	EndGlobalSection
+EndGlobal
