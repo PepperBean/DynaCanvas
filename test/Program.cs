@@ -12,7 +12,7 @@ namespace test
         static void Main(string[] args)
         {
             string path = @"D:\workspace\Data\china-latest\roads.shp";
-            Shapefile shpFile = new Shapefile(path);
+          //  Shapefile shpFile = new Shapefile(path);
             Console.WriteLine("done!");
             Console.ReadLine();
         }

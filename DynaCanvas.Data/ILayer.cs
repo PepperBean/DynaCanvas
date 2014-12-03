@@ -9,6 +9,7 @@ namespace DynaCanvas.Data
 {
     public interface ILayer
     {
+        // feature id start form 1
         string LayerName
         {
             get;

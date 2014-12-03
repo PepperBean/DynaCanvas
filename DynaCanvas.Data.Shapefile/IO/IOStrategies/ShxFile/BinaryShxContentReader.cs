@@ -15,6 +15,7 @@ namespace DynaCanvas.Data.Shapefile.IO
         const int _ShxRecordLength = 8;
         public BinaryShxContentReader(string filePath)
         {
+            Contract.Requires(!string.IsNullOrEmpty(filePath));
             Contract.Requires(File.Exists(filePath));
             _FilePath = filePath;
         }
