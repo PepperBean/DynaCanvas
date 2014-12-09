@@ -100,13 +100,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IO\FileReaderCache.cs" />
+    <Compile Include="FeatureLite.cs" />
+    <Compile Include="IO\Cache\MMFCache.cs" />
+    <Compile Include="IO\Cache\FileDataCache.cs" />
+    <Compile Include="IO\Cache\BinReaderCache.cs" />
     <Compile Include="IO\IOStrategies\BinaryFileHeaderReader.cs" />
-    <Compile Include="IO\IOStrategies\ShpFile\BaseBinaryShapeReader.cs" />
-    <Compile Include="IO\IOStrategies\ShpFile\BinaryMultiPointReader.cs" />
-    <Compile Include="IO\IOStrategies\ShpFile\BinaryPointReader.cs" />
-    <Compile Include="IO\IOStrategies\ShpFile\BinaryPolygonReader.cs" />
-    <Compile Include="IO\IOStrategies\ShpFile\BinaryPolylineReader.cs" />
     <Compile Include="IO\IOStrategies\ShpFile\BinaryShpContentReader.cs" />
     <Compile Include="IO\IOStrategies\ShxFile\BinaryShxContentReader.cs" />
     <Compile Include="IO\IOStrategyInterface\IFileHeaderWriteStrategy.cs" />

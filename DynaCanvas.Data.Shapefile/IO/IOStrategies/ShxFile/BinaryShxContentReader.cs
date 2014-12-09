@@ -20,28 +20,31 @@ namespace DynaCanvas.Data.Shapefile.IO
             _FilePath = filePath;
         }
 
-        public ShxRecord[] ReadRecordes(int startIndex, int count)
+        public ShxRecord[] ReadRecordes(int startRecIndex, int count)
         {
-
-            var brShapeIndex = FileReaderCache.GetFileReadItems(_FilePath).BinaryReader;
-            brShapeIndex.BaseStream.Position = 0;
-            brShapeIndex.BaseStream.Seek(100 + startIndex * 8, 0);  //skip the header
-            var records = new ShxRecord[count];
-
-            for (int i = 0; i < count; i++)
+            using (var stream = MMFCache.GetFileReadItems(_FilePath)
+                .MMF.CreateViewStream(100 + startRecIndex * 8, count * 16))
             {
-                int offset =2* Util.SwapByteOrder(brShapeIndex.ReadInt32()); // word to byte
-                int cLength =2* Util.SwapByteOrder(brShapeIndex.ReadInt32());
+                using (var brShapeIndex = new BinaryReader(stream))
+                {
+                    var records = new ShxRecord[count];
 
-                records[i] = new ShxRecord(offset, cLength);
+                    for (int i = 0; i < count; i++)
+                    {
+                        int offset = 2 * Util.SwapByteOrder(brShapeIndex.ReadInt32()); // word to byte
+                        int cLength = 2 * Util.SwapByteOrder(brShapeIndex.ReadInt32());
+
+                        records[i] = new ShxRecord(offset, cLength);
+                    }
+                    return records;
+                }
             }
-            return records;
         }
 
-        public ShxRecord ReadRecorde(int index)
+        public ShxRecord ReadRecorde(int recIndex)
         {
             // temp
-            return ReadRecordes(index, 1)[0];
+            return ReadRecordes(recIndex, 1)[0];
         }
     }
 }

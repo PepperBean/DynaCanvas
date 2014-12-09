@@ -73,30 +73,30 @@ namespace DynaCanvas.Data.Shapefile
             Contract.Requires(_ShapeType != ShapeType.NullShape);
             Contract.Requires(_ShpFile != null);
 
-            switch (_ShapeType)
-            {
-                case ShapeType.Point:
-                    {
-                        BinaryPointReader contentReader = new BinaryPointReader(_ShpFilePath);
-                        IFileHeaderReadStrategy headerReader = new BinaryFileHeaderReader(_ShpFilePath);
-                        _ShpFile = new ShpFile<Point>(headerReader, contentReader);
-                    }
-                    break;
-                case ShapeType.Polyline:
-                    {
-                        BinaryPolylineReader contentReader = new BinaryPolylineReader(_ShpFilePath);
-                        IFileHeaderReadStrategy headerReader = new BinaryFileHeaderReader(_ShpFilePath);
-                        _ShpFile = new ShpFile<Polyline>(headerReader, contentReader);
-                    }
-                    break;
-                case ShapeType.Polygon:
-                    {
-                        BinaryPolygonReader contentReader = new BinaryPolygonReader(_ShpFilePath);
-                        IFileHeaderReadStrategy headerReader = new BinaryFileHeaderReader(_ShpFilePath);
-                        _ShpFile = new ShpFile<Polygon>(headerReader, contentReader);
-                    }
-                    break;
-            }
+            //switch (_ShapeType)
+            //{
+            //    case ShapeType.Point:
+            //        {
+            //            BinaryPointReader contentReader = new BinaryPointReader(_ShpFilePath);
+            //            IFileHeaderReadStrategy headerReader = new BinaryFileHeaderReader(_ShpFilePath);
+            //            _ShpFile = new ShpFile<Point>(headerReader, contentReader);
+            //        }
+            //        break;
+            //    case ShapeType.Polyline:
+            //        {
+            //            BinaryPolylineReader contentReader = new BinaryPolylineReader(_ShpFilePath);
+            //            IFileHeaderReadStrategy headerReader = new BinaryFileHeaderReader(_ShpFilePath);
+            //            _ShpFile = new ShpFile<Polyline>(headerReader, contentReader);
+            //        }
+            //        break;
+            //    case ShapeType.Polygon:
+            //        {
+            //            BinaryPolygonReader contentReader = new BinaryPolygonReader(_ShpFilePath);
+            //            IFileHeaderReadStrategy headerReader = new BinaryFileHeaderReader(_ShpFilePath);
+            //            _ShpFile = new ShpFile<Polygon>(headerReader, contentReader);
+            //        }
+            //        break;
+            //}
         }
 
         //public Feature GetFeature(int fid)  // feature id start form 1

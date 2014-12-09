@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DynaCanvas.Data.Shapefile.IO
 {
-    internal static class FileReaderCache
+    internal static class BinReaderCache
     {
         static Dictionary<string, WeakReference<FileReaderItems>>
              _Cache = new Dictionary<string, WeakReference<FileReaderItems>>();
@@ -42,6 +42,7 @@ namespace DynaCanvas.Data.Shapefile.IO
             FilePath = filePath;
             FileStream = new FileStream(FilePath, FileMode.Open, FileAccess.Read);
             BinaryReader = new BinaryReader(FileStream, System.Text.Encoding.Unicode);
+
             //BigEndianBinaryReader = new BinaryReader(FileStream, System.Text.Encoding.BigEndianUnicode);
         }
         public readonly string FilePath;

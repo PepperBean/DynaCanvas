@@ -37,26 +37,26 @@ namespace DynaCanvas.Data.Shapefile
 
 
     }
-    public class ShpFile<ShapeT> : ShpFile
-    {
-        IShpContentReadStrategy<ShapeT> _ContentReader;
-        public ShpFile(
-           IFileHeaderReadStrategy headerReader
-           , IShpContentReadStrategy<ShapeT> contentReader
-           )
-            : base(headerReader)
-        {
-            Contract.Requires(headerReader != null);
+    //public class ShpFile<ShapeT> : ShpFile
+    //{
+        //IShpContentReadStrategy<ShapeT> _ContentReader;
+        //public ShpFile(
+        //   IFileHeaderReadStrategy headerReader
+        //   , IShpContentReadStrategy<ShapeT> contentReader
+        //   )
+        //    : base(headerReader)
+        //{
+        //    Contract.Requires(headerReader != null);
 
-            _ContentReader = contentReader;
-        }
-        public ShapeT ReadShape(int recPos)
-        {
-            return _ContentReader.ReadShape(recPos);
-        }
+        //    _ContentReader = contentReader;
+        //}
+        //public ShapeT ReadShape(int recPos)
+        //{
+        //    return _ContentReader.ReadShape(recPos);
+        //}
         // writer todo...
 
-    }
+    //}
 
 
     public struct ShpRecordHeader
