@@ -22,29 +22,30 @@ namespace DynaCanvas.Data.Shapefile
         BoundingBox _MBR;
         ShapeType _ShapeType = ShapeType.NullShape;
         string _LayerName;
-        IGeometryFactory _GeoFactory;
-
+      //  IGeometryFactory _GeoFactory;
+        IShapefileIOFactory _IOFactory;
         ShpFile _ShpFile;
         ShxFile _ShxFile;
         DBFile _DBFile;
 
 
-        public Shapefile(string fullName,IGeometryFactory geoFactory)
+        public Shapefile(string fullName)//, IGeometryFactory geoFactory)
         {
             Contract.Requires(!string.IsNullOrEmpty(fullName));
 
-            _GeoFactory = geoFactory;
+           // _GeoFactory = geoFactory;
             InitFilePath(fullName);
+            _IOFactory = new DefaultShapefileIOFactory(_ShpFilePath, _ShxFilePath, _DBFileFilePath);
             InitShapefile();
         }
 
         private void InitShapefile()
         {
             _LayerName = Path.GetFileNameWithoutExtension(_FileName);
-            LoadShxFile();
-            _ShapeType = (ShapeType)_ShxFile.Header.ShapeType;
-            _MBR = _ShxFile.Header.MBR;
-            LoadShpFile();
+            InitShxFile();
+            _ShapeType = (ShapeType)_ShxFile.ShapeType;
+            _MBR = _ShxFile.MBR;
+            InitShpFile();
         }
 
         private void InitFilePath(string fullName)
@@ -60,60 +61,25 @@ namespace DynaCanvas.Data.Shapefile
             _DBFileFilePath = Path.ChangeExtension(fullName, Util.DBF_SUFFIX);
         }
 
-        private void LoadShxFile()
+        private void InitShxFile()
         {
-            // temp
-            IShxContentReadStrategy contentReader = new BinaryShxContentReader(_ShxFilePath);
-            IFileHeaderReadStrategy headerReader = new BinaryFileHeaderReader(_ShxFilePath);
-            _ShxFile = new ShxFile(headerReader, contentReader);
+            Contract.Requires(_ShxFile != null);
+            _ShxFile = new ShxFile(_IOFactory);
         }
 
-        private void LoadShpFile()
+        private void InitShpFile()
         {
-            Contract.Requires(_ShapeType != ShapeType.NullShape);
             Contract.Requires(_ShpFile != null);
-
-            //switch (_ShapeType)
-            //{
-            //    case ShapeType.Point:
-            //        {
-            //            BinaryPointReader contentReader = new BinaryPointReader(_ShpFilePath);
-            //            IFileHeaderReadStrategy headerReader = new BinaryFileHeaderReader(_ShpFilePath);
-            //            _ShpFile = new ShpFile<Point>(headerReader, contentReader);
-            //        }
-            //        break;
-            //    case ShapeType.Polyline:
-            //        {
-            //            BinaryPolylineReader contentReader = new BinaryPolylineReader(_ShpFilePath);
-            //            IFileHeaderReadStrategy headerReader = new BinaryFileHeaderReader(_ShpFilePath);
-            //            _ShpFile = new ShpFile<Polyline>(headerReader, contentReader);
-            //        }
-            //        break;
-            //    case ShapeType.Polygon:
-            //        {
-            //            BinaryPolygonReader contentReader = new BinaryPolygonReader(_ShpFilePath);
-            //            IFileHeaderReadStrategy headerReader = new BinaryFileHeaderReader(_ShpFilePath);
-            //            _ShpFile = new ShpFile<Polygon>(headerReader, contentReader);
-            //        }
-            //        break;
-            //}
+            _ShpFile = new ShpFile(_IOFactory);
         }
 
-        //public Feature GetFeature(int fid)  // feature id start form 1
-        //{
-           
-    //        var rPos=_ShxFile.Records[fid - 1].Offset;
-    //        BinaryReader br;
-    //        MemoryStream ms=new MemoryStream(
-    //        switch (_ShapeType)
+        private void InitDBFile()
+        {
+            // TODO...
+        }
 
-    //{
-    //          //  case ShapeType.Point:
+        
 
-    ////	default:
-    //}
-            
-        //}
 
 
 
@@ -122,10 +88,6 @@ namespace DynaCanvas.Data.Shapefile
             get { return _LayerName; }
         }
 
-        //public GeoAPI.Geometries.IEnvelope Extent
-        //{
-        //    get { throw new NotImplementedException(); }
-        //}
 
     }
 }

@@ -9,11 +9,11 @@ using DynaCanvas.Data.Shapefile;
 
 namespace DynaCanvas.Data.Shapefile.IO
 {
-    public class BinaryShxContentReader : IShxContentReadStrategy
+    public class ShxContentReader : IShxContentReadStrategy
     {
         private string _FilePath;
         const int _ShxRecordLength = 8;
-        public BinaryShxContentReader(string filePath)
+        public ShxContentReader(string filePath)
         {
             Contract.Requires(!string.IsNullOrEmpty(filePath));
             Contract.Requires(File.Exists(filePath));

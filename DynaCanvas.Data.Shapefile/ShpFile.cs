@@ -5,68 +5,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DynaCanvas.Data.Shapefile.IO;
+using DynaCanvas.Data.Shapefile.Shapes;
 using GeoAPI.Geometries;
 
 namespace DynaCanvas.Data.Shapefile
 {
-    public abstract class ShpFile
+    public class ShpFile
     {
         protected FileHeader _FileHeader;
-        protected string _FilePath;
+      //  protected string _FilePath;
         private IFileHeaderReadStrategy _HeaderReader;
+        private IShpContentReadStrategy _ContentReader;
         private IGeometryFactory _GeoFactory;
+        private BoundingBox _MBR;
+        private IShapefileIOFactory _IOFactory;
 
-        protected ShpFile(IFileHeaderReadStrategy headerReader)
-           // ,IGeometryFactory geoFactory)
+        public ShpFile(IShapefileIOFactory ioFactory)
         {
-            _HeaderReader = headerReader;
-           // _GeoFactory = geoFactory;
+           // _FilePath = filePath;
+            _IOFactory = ioFactory;
+            _ContentReader = _IOFactory.GetShpContentReader();
+            InitHeader();
         }
 
         private void InitHeader()
         {
+            _HeaderReader = _IOFactory.GetShpFileHeaderReader();
             _FileHeader = _HeaderReader.ReadHeader();
+            this._MBR = _FileHeader.MBR;
         }
-        public FileHeader Header
+        public BoundingBox MBR
         {
             get
             {
-                return _FileHeader;
+                return _MBR;
             }
         }
 
-
-    }
-    //public class ShpFile<ShapeT> : ShpFile
-    //{
-        //IShpContentReadStrategy<ShapeT> _ContentReader;
-        //public ShpFile(
-        //   IFileHeaderReadStrategy headerReader
-        //   , IShpContentReadStrategy<ShapeT> contentReader
-        //   )
-        //    : base(headerReader)
-        //{
-        //    Contract.Requires(headerReader != null);
-
-        //    _ContentReader = contentReader;
-        //}
-        //public ShapeT ReadShape(int recPos)
-        //{
-        //    return _ContentReader.ReadShape(recPos);
-        //}
-        // writer todo...
-
-    //}
-
-
-    public struct ShpRecordHeader
-    {
-        public ShpRecordHeader(int id, int cLength)
+        public FeatureLite ReaderShape(int recHeaderPos, int recCLength)
         {
-            ID = id;
-            ContentLength = cLength;
+
+            return _ContentReader.ReaderShape(recHeaderPos, recCLength);
         }
-        public int ID;
-        public int ContentLength;
     }
+
 }

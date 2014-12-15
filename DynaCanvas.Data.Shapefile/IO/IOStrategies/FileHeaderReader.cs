@@ -9,13 +9,13 @@ using DynaCanvas.Data.Shapefile.Shapes;
 
 namespace DynaCanvas.Data.Shapefile.IO
 {
-    public class BinaryFileHeaderReader : IFileHeaderReadStrategy
+    public class FileHeaderReader : IFileHeaderReadStrategy
     {
         // private BinaryReader brShapeIndex;
         //private int _RecordCount;
         // private FileHeader _FileHeader;
         private string _FilePath;
-        public BinaryFileHeaderReader(string filePath)
+        public FileHeaderReader(string filePath)
         {
             Contract.Requires(File.Exists(filePath));
             _FilePath = filePath;

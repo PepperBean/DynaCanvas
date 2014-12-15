@@ -9,7 +9,7 @@ namespace DynaCanvas.Data.Shapefile.IO
 
     public interface IShpContentReadStrategy
     {
-        byte[] ReaderShape(int recPos);
+        FeatureLite ReaderShape(int recHeaderPos, int recCLength);
     }
 
 

@@ -9,17 +9,13 @@ using GeoAPI.Geometries;
 
 namespace DynaCanvas.Data.Shapefile.IO
 {
-    public class BinaryShpContentReader //: IShpContentReadStrategy
+    public class ShpContentReader : IShpContentReadStrategy
     {
         private string _FilePath;
-        private IGeometryFactory _GeoFactory;
         private const int HEADER_LENGTH = 8;
-        public BinaryShpContentReader(string filePath
-            , IGeometryFactory geoFactory
-            )
+        public ShpContentReader(string filePath)
         {
             _FilePath = filePath;
-            _GeoFactory = geoFactory;
         }
 
         public FeatureLite ReaderShape(int recHeaderPos, int recCLength)
@@ -36,7 +32,7 @@ namespace DynaCanvas.Data.Shapefile.IO
 
                     ShapeType shapeType = (ShapeType)brReader.ReadInt32();  // 4
 
-                    if (shapeType == ShapeType.Point)
+                    if (shapeType == ShapeType.Point)   
                     {
                         fl = new FeatureLite(fID, shapeType
                             , brReader.ReadDouble(), brReader.ReadDouble());
