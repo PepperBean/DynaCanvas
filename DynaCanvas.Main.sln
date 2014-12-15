@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SpatialIndex", "SpatialIndex", "{E66FD30C-94A8-4E65-9A8D-2583267F4BE6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynaCanvas.SpatialIndex", "DynaCanvas.SpatialIndex\DynaCanvas.SpatialIndex.csproj", "{2C68AF9B-A811-44BB-84EA-6CAAE7690E7A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{E1E5F571-CE0A-4EE3-8FDF-8C4065DCD08B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1E5F571-CE0A-4EE3-8FDF-8C4065DCD08B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1E5F571-CE0A-4EE3-8FDF-8C4065DCD08B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C68AF9B-A811-44BB-84EA-6CAAE7690E7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C68AF9B-A811-44BB-84EA-6CAAE7690E7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C68AF9B-A811-44BB-84EA-6CAAE7690E7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C68AF9B-A811-44BB-84EA-6CAAE7690E7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,5 +50,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8F02BFA1-7A63-4932-AC85-E6E97ACE72EC} = {88FE31A6-4219-43C7-9434-7E86711FE606}
 		{6036B313-3C75-4954-B463-92196F4493CF} = {88FE31A6-4219-43C7-9434-7E86711FE606}
+		{2C68AF9B-A811-44BB-84EA-6CAAE7690E7A} = {E66FD30C-94A8-4E65-9A8D-2583267F4BE6}
 	EndGlobalSection
 EndGlobal
