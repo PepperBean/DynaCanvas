@@ -49,9 +49,9 @@ namespace DynaCanvas.SpatialIndex
             }
 
             return new Envelope(Math.Min(env1.MaxX, env2.MaxX)
+                , Math.Max(env1.MinX, env2.MinX)
                 , Math.Min(env1.MaxY, env2.MaxY)
-                , Math.Max(env1.MinX, env2.MinX),
-                               Math.Max(env1.MinY, env2.MinY)).Area;
+                               ,Math.Max(env1.MinY, env2.MinY)).Area;
         }
 
     }

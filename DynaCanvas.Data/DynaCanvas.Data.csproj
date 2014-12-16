@@ -93,6 +93,8 @@
     <Compile Include="Geometries\SpatialRelationPredicate.cs" />
     <Compile Include="IDataSource.cs" />
     <Compile Include="Feature.cs" />
+    <Compile Include="IFeature.cs" />
+    <Compile Include="IVectorFeature.cs" />
     <Compile Include="IVectorLayer.cs" />
     <Compile Include="ILayer.cs" />
     <Compile Include="Manipulator\IFeatureProvider.cs" />

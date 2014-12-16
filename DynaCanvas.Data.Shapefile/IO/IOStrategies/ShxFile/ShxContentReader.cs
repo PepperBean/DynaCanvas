@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.IO;
+using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,8 +23,11 @@ namespace DynaCanvas.Data.Shapefile.IO
 
         public ShxRecord[] ReadRecordes(int startRecIndex, int count)
         {
+
+
             using (var stream = MMFCache.GetFileReadItems(_FilePath)
-                .MMF.CreateViewStream(100 + startRecIndex * 8, count * 16))
+                .MMF.CreateViewStream(100 + startRecIndex * 8, count * 8))
+         
             {
                 using (var brShapeIndex = new BinaryReader(stream))
                 {

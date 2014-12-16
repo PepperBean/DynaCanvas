@@ -3,25 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GeoAPI.DataStructures;
 using GeoAPI.Geometries;
 
 namespace DynaCanvas.Data
 {
-    public interface ILayer
+    public interface IFeature
     {
-        // feature id start form 1
-        string LayerName
+        int FeatureID
         {
             get;
         }
-
-        Envelope MBR
+        ILayer Layer
         {
             get;
         }
-
-
 
     }
 }

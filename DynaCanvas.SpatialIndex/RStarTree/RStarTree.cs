@@ -67,35 +67,28 @@ namespace DynaCanvas.SpatialIndex.RStarTree
             InsertNode(de);
         }
 
-        public void Insert(ICollection<Tuple<int, Envelope>> dataList)
-        {
-            Stopwatch s1 = new Stopwatch();
-            s1.Start();
-            dataList.AsParallel().ToList().ForEach(e =>
-            {
-                Insert(e.Item1, e.Item2);
-            });
-            //foreach (var data in dataList)
-            //{
-            //    Insert(data.Item1, data.Item2);
-            //}
-            s1.Stop();
-            Debug.Assert(false, "初始化耗时：" + s1.ElapsedMilliseconds);
-        }
+        //public void Insert(ICollection<Tuple<int, Envelope>> dataList)
+        //{
+        //    Stopwatch s1 = new Stopwatch();
+        //    s1.Start();
+        //    dataList.AsParallel().ToList().ForEach(e =>
+        //    {
+        //        Insert(e.Item1, e.Item2);
+        //    });
+
+        //    s1.Stop();
+        //    Debug.Assert(false, "初始化耗时：" + s1.ElapsedMilliseconds);
+        //}
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Update(int dataId, Envelope env)
-        {
+           // todo...
             throw new NotImplementedException();
         }
 
         public IEnumerable<int> Search(Envelope extent)
         {
-            
+
             List<int> result = new List<int>();
             if (_root == null)
             {
@@ -182,7 +175,7 @@ namespace DynaCanvas.SpatialIndex.RStarTree
                                     .OrderBy(e =>
                                     {
                                         return ((e as Leaf).Entries
-                                            .Sum(e2 =>e2.MBR.OverlapSize(entryToAdd.MBR)));
+                                            .Sum(e2 => e2.MBR.OverlapSize(entryToAdd.MBR)));
                                     })
                                     .Take(2)
                                     .First().ID;
@@ -199,10 +192,7 @@ namespace DynaCanvas.SpatialIndex.RStarTree
         }
         private void Split(INode nodeAfterEntryAdded)
         {
-#if check
-            CheckLeafDeepthUnique();
-            CheckLeafLeaveHasNonLeaf();
-#endif
+
             INode newN1, newN2;
             if (nodeAfterEntryAdded is NonLeafNode)
             {
@@ -258,14 +248,6 @@ namespace DynaCanvas.SpatialIndex.RStarTree
             {
                 OverflowTreatment(parentNode);
             }
-#if check
-            CheckBrotherSameNodeType(newN1);
-            CheckBrotherSameNodeType(newN2);
-            CheckChildrenSameNodeType(newN1);
-            CheckChildrenSameNodeType(newN2);
-            CheckLeafDeepthUnique();
-            CheckLeafLeaveHasNonLeaf();
-#endif
         }
         /// <summary>
         /// 
@@ -340,80 +322,6 @@ namespace DynaCanvas.SpatialIndex.RStarTree
             var e2 = chosenEntryList.Skip(splitIndex);
             return new Tuple<IEnumerable<IEntry>, IEnumerable<IEntry>>(e1, e2);
         }
-        private bool CheckLeafLeaveHasNonLeaf()
-        {
-            var leaveLevel = _nodesMap.Values.First(e => e is Leaf).Level;
-            foreach (var n in _nodesMap.Values)
-            {
-                if (n is NonLeafNode
-                    && n.Level == leaveLevel)
-                {
-                    return true;
-                }
-
-            }
-            return false;
-        }
-        private bool CheckChildrenSameNodeType(INode node)
-        {
-            if (node is Leaf)
-            {
-                return true;
-            }
-            if (node.Entries.Count() == 0)
-            {
-                return true;
-            }
-            return CheckBrotherSameNodeType(node.Entries.Select(e => e as INode).First());
-        }
-        private bool CheckBrotherSameNodeType(INode node)
-        {
-            var thisType = node.GetType();
-            foreach (var bro in node.ParentNode.Entries.Where(e => e != node))
-            {
-                if (bro.GetType() != thisType)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-        private bool CheckLeafDeepthUnique()
-        {
-            int leaveDeepth = 0;
-            foreach (var n in _nodesMap.Values)
-            {
-                if (!n.IsLeaf)
-                {
-                    continue;
-                }
-                int deep = 0;
-
-                INode parent = n.ParentNode;
-                if (parent != null)
-                {
-                    deep++;
-                }
-                while (parent != null)
-                {
-                    deep++;
-                    parent = parent.ParentNode;
-                }
-                if (leaveDeepth == 0)
-                {
-                    leaveDeepth = deep;
-                    continue;
-                }
-                else if (leaveDeepth != deep)
-                {
-                    return false;
-
-                }
-
-            }
-            return true;
-        }
-
 
         HashSet<int> _OverflowTreatmentToken = new HashSet<int>();
         private void OverflowTreatment(INode nodeNeedTreat)
@@ -430,18 +338,12 @@ namespace DynaCanvas.SpatialIndex.RStarTree
                 {
                     ReInsert<INode>(nodeNeedTreat as NonLeafNode);
                 }
-#if check
-                CheckLeafDeepthUnique();
-                CheckLeafLeaveHasNonLeaf();
-#endif
+
             }
             else
             {
                 Split(nodeNeedTreat);
-#if check
-                CheckLeafDeepthUnique();
-                CheckLeafLeaveHasNonLeaf();
-#endif
+
             }
         }
 
@@ -450,10 +352,7 @@ namespace DynaCanvas.SpatialIndex.RStarTree
         private void ReInsert<ET>(INode<ET> nodeAfterEntryAdded)
             where ET : IEntry
         {
-#if check
-            CheckBrotherSameNodeType(nodeAfterEntryAdded);
-            CheckChildrenSameNodeType(nodeAfterEntryAdded);
-#endif
+
             var nodeCenter = nodeAfterEntryAdded.MBR.Centre;
             var orderedEntries = nodeAfterEntryAdded.Entries
                                 .OrderByDescending(e => e.MBR.Centre.Distance(nodeCenter));
@@ -465,10 +364,7 @@ namespace DynaCanvas.SpatialIndex.RStarTree
                 _nodesMap.TryRemove(e.ID, out o);
             });
             nodeAfterEntryAdded.RefreshMBR();
-#if check
-            CheckLeafDeepthUnique();
-            CheckLeafLeaveHasNonLeaf();
-#endif
+
             reinsertEntries.Reverse();
             foreach (var e in reinsertEntries)
             {
@@ -478,18 +374,11 @@ namespace DynaCanvas.SpatialIndex.RStarTree
                 }
                 InsertNode(e, true);
             }
-#if check
-            CheckLeafDeepthUnique();
-            CheckLeafLeaveHasNonLeaf();
-#endif
 
         }
         private void InsertNode(IEntry entry, bool reInsert = false)
         {
-#if check
-            CheckLeafDeepthUnique();
-       //     CheckLeafLeaveHasNonLeaf();
-#endif
+
             if (!reInsert)
                 _OverflowTreatmentToken.Clear();
 
@@ -525,22 +414,11 @@ namespace DynaCanvas.SpatialIndex.RStarTree
 
                 (nodeAddTo as NonLeafNode).AddEntry(entry as INode);
                 _nodesMap.AddOrUpdate(entry.ID, entry as INode, (i, n) => entry as INode);
-#if check
-                CheckBrotherSameNodeType(nodeAddTo);
-                CheckChildrenSameNodeType(nodeAddTo);
-                CheckLeafDeepthUnique();
-                CheckLeafLeaveHasNonLeaf();
-#endif
+
                 if ((nodeAddTo as NonLeafNode).Entries.Count() > _maxEntryCount)
                 {
                     OverflowTreatment(nodeAddTo);
                 }
-#if check
-                CheckBrotherSameNodeType(nodeAddTo);
-                CheckChildrenSameNodeType(nodeAddTo);
-                CheckLeafDeepthUnique();
-                CheckLeafLeaveHasNonLeaf();
-#endif
             }
             else
             {
@@ -551,11 +429,6 @@ namespace DynaCanvas.SpatialIndex.RStarTree
                 {
                     OverflowTreatment(nodeAddTo);
                 }
-#if check
-                CheckLeafDeepthUnique();
-                CheckLeafLeaveHasNonLeaf();
-
-#endif
             }
 
         }

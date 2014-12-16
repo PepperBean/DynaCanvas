@@ -9,7 +9,7 @@ namespace DynaCanvas.Data.Geometries
     /// <summary>
     /// Spatial operations
     /// </summary>
-    public enum SpatialRelationPredicate
+    public enum SRPredicate
     {
         Contains,
         ContainsProperly,

@@ -8,6 +8,7 @@ using DynaCanvas.Data.Shapefile.Shapes;
 using System.Runtime.InteropServices;
 using DynaCanvas.Data.Shapefile.IO;
 using System.Diagnostics.Contracts;
+using GeoAPI.Geometries;
 
 namespace DynaCanvas.Data.Shapefile
 {
@@ -37,7 +38,7 @@ namespace DynaCanvas.Data.Shapefile
         }
 
 
-        public BoundingBox MBR
+        public Envelope MBR
         {
             get
             {

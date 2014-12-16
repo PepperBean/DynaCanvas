@@ -27,22 +27,24 @@ namespace DynaCanvas.Data.Shapefile.IO
                 {
                     FeatureLite fl;
 
-                    int fID = brReader.ReadInt32();
-                    int clength = brReader.ReadInt32();
+                    int fID = Util.SwapByteOrder(brReader.ReadInt32());
+                    int clength = Util.SwapByteOrder(brReader.ReadInt32());
 
                     ShapeType shapeType = (ShapeType)brReader.ReadInt32();  // 4
 
-                    if (shapeType == ShapeType.Point)   
+                    if (shapeType == ShapeType.Point)
                     {
                         fl = new FeatureLite(fID, shapeType
                             , brReader.ReadDouble(), brReader.ReadDouble());
                     }
                     else
                     {
-                        BoundingBox mbr = new BoundingBox(brReader.ReadDouble()
-                            , brReader.ReadDouble()
-                            , brReader.ReadDouble()
-                            , brReader.ReadDouble());  // 8*4=32
+                        double xMin = brReader.ReadDouble();
+                        double yMin = brReader.ReadDouble();
+                        double xMax = brReader.ReadDouble();
+                        double yMax = brReader.ReadDouble();// 8*4=32
+
+                        Envelope mbr = new Envelope(xMin, xMax, yMin, yMax);
 
                         var shapeBytes = new byte[clength - 36];  // 4+32=36
                         brReader.BaseStream.Seek(36, 0);

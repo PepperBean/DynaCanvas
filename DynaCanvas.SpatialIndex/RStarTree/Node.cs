@@ -54,7 +54,10 @@ namespace DynaCanvas.SpatialIndex.RStarTree
         {
             _entries.AddOrUpdate(entry.ID, entry, (i, n) => entry);
             entry.ParentNode = this;
-            //       entry.Level = this.Level + 1;
+            if (this.MBR == null)
+            {
+                this.RefreshMBR();
+            }
             this.MBR = this.MBR.ExpandedBy(entry.MBR);
         }
         public void AddEntries(IEnumerable<IEntry> entries)
@@ -151,6 +154,10 @@ namespace DynaCanvas.SpatialIndex.RStarTree
         public void AddEntry(DataEntry entry)
         {
             _entries.AddOrUpdate(entry.ID, entry, (i, d) => { return entry; });
+            if (this.MBR == null)
+            {
+                this.RefreshMBR();
+            }
             this.MBR = this.MBR.ExpandedBy(entry.MBR);
         }
         public void AddEntries(IEnumerable<IEntry> entries)

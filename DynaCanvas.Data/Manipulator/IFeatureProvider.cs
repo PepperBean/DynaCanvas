@@ -12,9 +12,9 @@ namespace DynaCanvas.Data.Manipulator
     public interface IFeatureProvider : IDisposable
     {
         Collection<Feature> GetFeaturesBySpatialRelation(IEnvelope range
-            , SpatialRelationPredicate relation);
+            , SRPredicate relation);
         Collection<Feature> GetFeatureaBySpatialRelation(IGeometry range
-            , SpatialRelationPredicate relation);
+            , SRPredicate relation);
         //Collection<uint> GetFeatureIDsBySpatialRelation(IEnvelope range
         //    , SpatialRelationPredicate relation);
         //Collection<uint> GetFeatureIDsBySpatialRelation(IGeometry range

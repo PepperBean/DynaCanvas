@@ -33,6 +33,10 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
+    <Reference Include="GeoAPI, Version=1.7.3.0, Culture=neutral, PublicKeyToken=a1a0da7def465678, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\GeoAPI.1.7.3.1\lib\net45\GeoAPI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,11 +51,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DynaCanvas.Data.Shapefile\DynaCanvas.Data.Shapefile.csproj">
       <Project>{6036b313-3c75-4954-b463-92196f4493cf}</Project>
       <Name>DynaCanvas.Data.Shapefile</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DynaCanvas.Data\DynaCanvas.Data.csproj">
+      <Project>{8f02bfa1-7a63-4932-ac85-e6e97ace72ec}</Project>
+      <Name>DynaCanvas.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

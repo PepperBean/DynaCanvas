@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DynaCanvas.Data.Shapefile.Shapes;
+using GeoAPI.Geometries;
 
 namespace DynaCanvas.Data.Shapefile.IO
 {
@@ -25,6 +26,7 @@ namespace DynaCanvas.Data.Shapefile.IO
             using (var stream = MMFCache.GetFileReadItems(_FilePath)
                 .MMF.CreateViewStream(0,100))
             {
+
                 using (var brShapeIndex =new BinaryReader(stream))
                 {
                     brShapeIndex.BaseStream.Seek(0, 0);
@@ -53,7 +55,7 @@ namespace DynaCanvas.Data.Shapefile.IO
                     x2 = brShapeIndex.ReadDouble();
                     y2 = brShapeIndex.ReadDouble();
 
-                    var mBR = new BoundingBox(x1, y1, x2, y2);
+                    var mBR = new Envelope(x1, x2, y1, y2);
                     var fileHeader = new FileHeader(IndexFileSize, version, shapeType, mBR);
                     return fileHeader;
                 }

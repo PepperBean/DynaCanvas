@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using DynaCanvas.Data.Shapefile.Shapes;
+using GeoAPI.Geometries;
 
 namespace DynaCanvas.Data.Shapefile
 {
@@ -16,7 +17,7 @@ namespace DynaCanvas.Data.Shapefile
             int fileLength,
             int version,
             int shapeType,
-            BoundingBox mBR)
+            Envelope mBR)
         {
 
             //FileCode = fileCode;
@@ -29,6 +30,6 @@ namespace DynaCanvas.Data.Shapefile
         public          int         FileLength  ;
         public readonly int         Version     ;
         public readonly int         ShapeType   ;
-        public          BoundingBox MBR         ;
+        public Envelope MBR;
     }
 }

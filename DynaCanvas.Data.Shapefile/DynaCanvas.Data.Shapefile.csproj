@@ -75,9 +75,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GeoAPI, Version=1.7.2.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="GeoAPI, Version=1.7.3.0, Culture=neutral, PublicKeyToken=a1a0da7def465678, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\GeoAPI.1.7.2\lib\net403-client\GeoAPI.dll</HintPath>
+      <HintPath>..\packages\GeoAPI.1.7.3.1\lib\net45\GeoAPI.dll</HintPath>
     </Reference>
     <Reference Include="NetTopologySuite, Version=1.13.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -136,6 +136,10 @@
     <ProjectReference Include="..\DynaCanvas.Data\DynaCanvas.Data.csproj">
       <Project>{8f02bfa1-7a63-4932-ac85-e6e97ace72ec}</Project>
       <Name>DynaCanvas.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DynaCanvas.SpatialIndex\DynaCanvas.SpatialIndex.csproj">
+      <Project>{2c68af9b-a811-44bb-84ea-6caae7690e7a}</Project>
+      <Name>DynaCanvas.SpatialIndex</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -12,8 +12,10 @@ namespace test
         static void Main(string[] args)
         {
             string path = @"D:\workspace\Data\china-latest\roads.shp";
-          //  Shapefile shpFile = new Shapefile(path);
-            Console.WriteLine("done!");
+            Shapefile shpFile = new Shapefile(path);
+            var f = shpFile.GetFeatureByID(101);
+           
+             Console.WriteLine("done!"+f.MBR.Area);
             Console.ReadLine();
         }
     }

@@ -17,7 +17,7 @@ namespace DynaCanvas.Data.Shapefile
         private IFileHeaderReadStrategy _HeaderReader;
         private IShpContentReadStrategy _ContentReader;
         private IGeometryFactory _GeoFactory;
-        private BoundingBox _MBR;
+        private Envelope _MBR;
         private IShapefileIOFactory _IOFactory;
 
         public ShpFile(IShapefileIOFactory ioFactory)
@@ -28,13 +28,14 @@ namespace DynaCanvas.Data.Shapefile
             InitHeader();
         }
 
+      
         private void InitHeader()
         {
             _HeaderReader = _IOFactory.GetShpFileHeaderReader();
             _FileHeader = _HeaderReader.ReadHeader();
             this._MBR = _FileHeader.MBR;
         }
-        public BoundingBox MBR
+        public Envelope MBR
         {
             get
             {
@@ -47,6 +48,7 @@ namespace DynaCanvas.Data.Shapefile
 
             return _ContentReader.ReaderShape(recHeaderPos, recCLength);
         }
+        
     }
 
 }
